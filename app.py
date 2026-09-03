@@ -9,7 +9,7 @@ st.set_page_config(page_title="OfficeDoc AI - Pro", page_icon="🏢", layout="wi
 st.title("🏢 OfficeDoc AI — Kurumsal Doküman Yönetim Paneli")
 st.write("Şirket içi dağınık bilgiyi tek bir noktadan yönetin, özetleyin ve görevleri otomatik ayıklayın.")
 
-# 🔑 SENİN ALDIĞIN TAZE YAPAY ZEKA BEYNİ (Groq API Anahtarı)
+# 🔑 TAZE YAPAY ZEKA BEYNİ VE ANAHTARI
 YAPAY_ZEKA_ANAHTARI = "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"
 client = Groq(api_key=YAPAY_ZEKA_ANAHTARI)
 
@@ -26,7 +26,7 @@ def pdf_metnini_oku(yuklenen_dosya):
         return None
 
 def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
-    """Bulut üzerindeki Llama 3.1 modeline kurumsal talimatları gönderir."""
+    """Bulut üzerindeki en güncel Llama 3.3 modeline kurumsal talimatları gönderir."""
     talimatlar = {
         "arama": (
             "Sen OfficeDoc AI arama asistanısın. Sana verilen döküman içeriğine göre kullanıcının sorusunu Türkçe yanıtla. "
@@ -52,8 +52,9 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
     kullanici_icerigi = f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}\n\nKULLANICI SORUSU: {ek_soru}" if gorev_tipi == "arama" else f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}"
         
     try:
+        # En güncel aktif model: llama-3.3-70b-versatile
         response = client.chat.completions.create(
-            model="llama-3.1-70b-versatile",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": sistem_talimati},
                 {"role": "user", "content": kullanici_icerigi}
