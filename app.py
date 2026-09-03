@@ -26,7 +26,7 @@ def pdf_metnini_oku(yuklenen_dosya):
         return None
 
 def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
-    """Bulut üzerindeki en kararlı Llama 3 modeline kurumsal talimatları gönderir."""
+    """Groq dokümantasyonundaki en güncel aktif modele kurumsal talimatları gönderir."""
     talimatlar = {
         "arama": (
             "Sen OfficeDoc AI arama asistanısın. Sana verilen döküman içeriğine göre kullanıcının sorusunu Türkçe yanıtla. "
@@ -52,9 +52,9 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
     kullanici_icerigi = f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}\n\nKULLANICI SORUSU: {ek_soru}" if gorev_tipi == "arama" else f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}"
         
     try:
-        # En kararlı ve asla kapanmayan ana üretim modeli: llama3-8b-8192
+        # 🎯 Resmi Groq listesindeki en güncel aktif üretim modeli: qwen/qwen3.6-27b
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="qwen/qwen3.6-27b",
             messages=[
                 {"role": "system", "content": sistem_talimati},
                 {"role": "user", "content": kullanici_icerigi}
