@@ -9,8 +9,8 @@ st.set_page_config(page_title="OfficeDoc AI - Pro", page_icon="🏢", layout="wi
 st.title("🏢 OfficeDoc AI — Kurumsal Doküman Yönetim Paneli")
 st.write("Şirket içi dağınık bilgiyi tek bir noktadan yönetin, özetleyin ve görevleri otomatik ayıklayın.")
 
-# 🔑 BULUT TABANLI YAPAY ZEKA BEYNİ (Groq API Anahtarı Doğrudan Koda Gömüldü)
-YAPAY_ZEKA_ANAHTARI = "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" # Bu geçici geliştirici anahtarıdır
+# 🔑 SENİN ALDIĞIN TAZE YAPAY ZEKA BEYNİ (Groq API Anahtarı)
+YAPAY_ZEKA_ANAHTARI = "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"
 client = Groq(api_key=YAPAY_ZEKA_ANAHTARI)
 
 def pdf_metnini_oku(yuklenen_dosya):
@@ -52,7 +52,6 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
     kullanici_icerigi = f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}\n\nKULLANICI SORUSU: {ek_soru}" if gorev_tipi == "arama" else f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}"
         
     try:
-        # Buluttaki süper hızlı Llama 3.1 70B modelini çağırıyoruz
         response = client.chat.completions.create(
             model="llama-3.1-70b-versatile",
             messages=[
@@ -77,9 +76,9 @@ with st.sidebar:
             
         st.write("---")
         st.subheader("⚙️ Hızlı İşlemler")
-        ozet_butonu = st.button("📄 Dokümanı Özetle (Problem 2)")
-        gorev_butonu = st.button("🧠 Görevleri/Kararları Çıkar (Problem 3 & 4)")
-        versiyon_butonu = st.button("⚠️ Versiyon Kontrolü Yap (Problem 5)")
+        ozet_butonu = st.button("📄 Dokümanı Özetle")
+        gorev_butonu = st.button("🧠 Görevleri/Kararları Çıkar")
+        versiyon_butonu = st.button("⚠️ Versiyon Kontrolü Yap")
 
 # 🖥️ Sağ Taraf: Ana Çalışma Alanı
 if yuklenen_dosya and dokuman_icerigi:
