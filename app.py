@@ -40,7 +40,7 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
         ),
         "govev_cikarma": (
             "Sen kurumsal bir analiz uzmanısın. Toplantı notu veya dökümandaki görevleri (action items) ayıkla. "
-            "Kimin ne yapacağını, önemli tarihleri ve alınan kararları GÖREVLER ve ÖNEMLİ TARİHLER başlıkları altında liste halinde Türkçe çıkar."
+            "Kimin ne yapacağını, önemli tarihleri ve alınan kararları GÖREVLER and ÖNEMLİ TARİHLER başlıkları altında liste halinde Türkçe çıkar."
         ),
         "versiyon": (
             "Sen bir döküman versiyon kontrol uzmanısın. Bu dökümanın metnini incele. "
@@ -52,9 +52,9 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
     kullanici_icerigi = f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}\n\nKULLANICI SORUSU: {ek_soru}" if gorev_tipi == "arama" else f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}"
         
     try:
-        # En güncel aktif model: llama-3.3-70b-versatile
+        # En kesin ve güncel model ismi: llama-3.3-70b-specdec
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.3-70b-specdec",
             messages=[
                 {"role": "system", "content": sistem_talimati},
                 {"role": "user", "content": kullanici_icerigi}
