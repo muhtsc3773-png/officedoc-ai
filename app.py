@@ -9,7 +9,7 @@ st.set_page_config(page_title="OfficeDoc AI - Pro", page_icon="🏢", layout="wi
 st.title("🏢 OfficeDoc AI — Kurumsal Doküman Yönetim Paneli")
 st.write("Şirket içi dağınık bilgiyi tek bir noktadan yönetin, özetleyin ve görevleri otomatik ayıklayın.")
 
-# 🔑 TAZE YAPAY ZEKA BEYNİ VE ANAHTARI
+# 🔑 SENİN ALDIĞIN CANLI YAPAY ZEKA ŞİFREN
 YAPAY_ZEKA_ANAHTARI = "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"
 client = Groq(api_key=YAPAY_ZEKA_ANAHTARI)
 
@@ -26,7 +26,7 @@ def pdf_metnini_oku(yuklenen_dosya):
         return None
 
 def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
-    """Bulut üzerindeki en güncel Llama 3.3 modeline kurumsal talimatları gönderir."""
+    """Bulut üzerindeki en kararlı Llama 3 modeline kurumsal talimatları gönderir."""
     talimatlar = {
         "arama": (
             "Sen OfficeDoc AI arama asistanısın. Sana verilen döküman içeriğine göre kullanıcının sorusunu Türkçe yanıtla. "
@@ -40,7 +40,7 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
         ),
         "govev_cikarma": (
             "Sen kurumsal bir analiz uzmanısın. Toplantı notu veya dökümandaki görevleri (action items) ayıkla. "
-            "Kimin ne yapacağını, önemli tarihleri ve alınan kararları GÖREVLER and ÖNEMLİ TARİHLER başlıkları altında liste halinde Türkçe çıkar."
+            "Kimin ne yapacağını, önemli tarihleri ve alınan kararları GÖREVLER ve ÖNEMLİ TARİHLER başlıkları altında liste halinde Türkçe çıkar."
         ),
         "versiyon": (
             "Sen bir döküman versiyon kontrol uzmanısın. Bu dökümanın metnini incele. "
@@ -52,9 +52,9 @@ def yapay_zeka_talebi(dokuman_metni, gorev_tipi, ek_soru=""):
     kullanici_icerigi = f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}\n\nKULLANICI SORUSU: {ek_soru}" if gorev_tipi == "arama" else f"DÖKÜMAN İÇERİĞİ:\n{dokuman_metni}"
         
     try:
-        # En kesin ve güncel model ismi: llama-3.3-70b-specdec
+        # En kararlı ve asla kapanmayan ana üretim modeli: llama3-8b-8192
         response = client.chat.completions.create(
-            model="llama-3.3-70b-specdec",
+            model="llama3-8b-8192",
             messages=[
                 {"role": "system", "content": sistem_talimati},
                 {"role": "user", "content": kullanici_icerigi}
